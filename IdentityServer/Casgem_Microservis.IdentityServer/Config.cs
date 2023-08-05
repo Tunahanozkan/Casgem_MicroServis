@@ -4,6 +4,7 @@
 
 using IdentityServer4;
 using IdentityServer4.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Casgem_Microservis.IdentityServer
@@ -72,7 +73,11 @@ namespace Casgem_Microservis.IdentityServer
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OfflineAccess,
-                        IdentityServerConstants.LocalApi.ScopeName,"roles"
+                        IdentityServerConstants.LocalApi.ScopeName,"roles" },
+                    AccessTokenLifetime=1*60*60,
+                    RefreshTokenExpiration=TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds,
+                    RefreshTokenUsage=TokenUsage.ReUse
                 },
             };
     }
